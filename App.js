@@ -16,7 +16,17 @@ const App = (props) => {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
 
-    if (initializing) {
+    const onAuthStateChanged = (user) => {
+        setUser(user);
+        if (initializing) {
+            setInitializing(false);
+        }
+    }
+
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber; // unsubscribe on unmount
+    }, []);
         return null;
     }
 
