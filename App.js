@@ -5,8 +5,8 @@ import React, {
 
 import { 
     Button,
-     Text,
-      View 
+    Text,
+    View 
     } from "react-native";
 
 import auth from '@react-native-firebase/auth';
@@ -16,17 +16,7 @@ const App = (props) => {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
 
-    const onAuthStateChanged = (user) => {
-        setUser(user);
-        if (initializing) {
-            setInitializing(false);
-        }
-    }
-
-    useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber; // unsubscribe on unmount
-    }, []);
+    if (initializing) {
         return null;
     }
 
@@ -45,7 +35,7 @@ const App = (props) => {
             <Text>Olá usuário!</Text>
 
             <Button
-                onPress={() => auth.().signOut() }
+                onPress={() => auth().signOut() }
                 titl="Sair" />
         </View>
     );
